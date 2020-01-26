@@ -18,6 +18,7 @@ export class IssuesRouter extends BaseRouter {
 
     protected configRoutes(): void {
         this.getAsync('/', this.getAll);
+        this.postAsync('/save', this.save);
     }
 
     private async getAll(req: Request, res: Response): Promise<void> {
@@ -25,5 +26,12 @@ export class IssuesRouter extends BaseRouter {
         const issues = await this.data.getAll();
 
         this.success(res, issues);
+    }
+
+    private async save(req: Request, res: Response): Promise<void> {
+
+        const model = await this.data.save(req.body);
+
+        this.success(res, model, 'Saved');
     }
 }

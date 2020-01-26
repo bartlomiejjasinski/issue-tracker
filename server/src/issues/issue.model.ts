@@ -3,7 +3,7 @@ import { Document, model, Model } from 'mongoose';
 export interface IssueModel extends Document {
     title: String;
     description: String;
-    state: 'open' | 'pending' | 'close';
+    state: 'open' | 'pending' | 'closed';
 }
 
 const schema = {
@@ -11,7 +11,7 @@ const schema = {
     description: String,
     state: {
         type: String,
-        enum: ['open', 'pending', 'close']
+        enum: ['open', 'pending', 'closed']
     }
 };
 

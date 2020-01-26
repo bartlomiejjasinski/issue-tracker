@@ -1,5 +1,6 @@
 import * as express from 'express';
 import * as mongoose from 'mongoose';
+import * as bodyParser from 'body-parser';
 import { Application } from 'express';
 import { config } from './config/config.env';
 
@@ -13,6 +14,7 @@ class Server {
     constructor() {
         this._app = express();
         this.configMongoose();
+        this.configMiddlewares();
         this.configRouter();
     }
 
@@ -31,6 +33,11 @@ class Server {
                 console.log(`connected to: ${config.database.url}`);
             }
         });
+    }
+
+    private configMiddlewares() {
+        this._app.use(bodyParser.urlencoded({ extended: false }));
+        this._app.use(bodyParser.json());
     }
 
     private configRouter() {

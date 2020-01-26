@@ -29,6 +29,10 @@ export abstract class BaseRouter {
         this._router.get(path, handler.bind(this));
     }
 
+    protected postAsync(path: PathParams, handler: RequestHandler): void {
+        this._router.post(path, handler.bind(this));
+    }
+
     protected success(res: Response, data: any, message?: string): void {
         const result: ResponseData = {
             success: true,
