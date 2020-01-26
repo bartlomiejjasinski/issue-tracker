@@ -1,0 +1,66 @@
+server/.DS_Store*
+server/Icon?
+server/._*
+
+# npm
+node_modules
+.idea
+server/node_modules
+server/*.log
+server/*.gz
+
+# Coveralls
+server/coverage
+
+# Benchmarking
+server/benchmarks/graphs
+
+# Custom
+server/src/config
+
+#ANGULAR
+
+# compiled output
+issue-tracker-app/dist
+issue-tracker-app/tmp
+issue-tracker-app/out-tsc
+# Only exists if Bazel was run
+issue-tracker-app/bazel-out
+
+# dependencies
+issue-tracker-app/node_modules
+
+# profiling files
+issue-tracker-app/chrome-profiler-events*.json
+issue-tracker-app/speed-measure-plugin*.json
+
+# IDEs and editors
+issue-tracker-app/.idea
+issue-tracker-app/.project
+issue-tracker-app/.classpath
+issue-tracker-app/.c9/
+issue-tracker-app/*.launch
+issue-tracker-app/.settings/
+issue-tracker-app/*.sublime-workspace
+
+# IDE - VSCode
+issue-tracker-app/.vscode/*
+!issue-tracker-app/.vscode/settings.json
+!issue-tracker-app/.vscode/tasks.json
+!issue-tracker-app/.vscode/launch.json
+!issue-tracker-app/.vscode/extensions.json
+issue-tracker-app/.history/*
+
+# misc
+issue-tracker-app/.sass-cache
+issue-tracker-app/connect.lock
+issue-tracker-app/coverage
+issue-tracker-app/libpeerconnection.log
+issue-tracker-app/npm-debug.log
+issue-tracker-app/yarn-error.log
+issue-tracker-app/testem.log
+issue-tracker-app/typings
+
+# System Files
+issue-tracker-app/.DS_Store
+issue-tracker-app/Thumbs.db
