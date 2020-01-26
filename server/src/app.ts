@@ -3,6 +3,8 @@ import * as mongoose from 'mongoose';
 import { Application } from 'express';
 import { config } from './config/config.env';
 
+import { IssuesRouter } from './issues/issues.router';
+
 const port = config.serverPort;
 
 class Server {
@@ -11,6 +13,7 @@ class Server {
     constructor() {
         this._app = express();
         this.configMongoose();
+        this.configRouter();
     }
 
     public start(): void {
@@ -28,6 +31,10 @@ class Server {
                 console.log(`connected to: ${config.database.url}`);
             }
         });
+    }
+
+    private configRouter() {
+        new IssuesRouter().asMiddleware(this._app);
     }
 }
 
