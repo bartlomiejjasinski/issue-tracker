@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IssueModel } from '../issue.model';
+import { IssuesData } from './../issues.data';
+import { ResponseData } from "../../common/ResponseData.class";
 
 @Component({
   selector: 'issues-list',
@@ -12,25 +14,18 @@ export class IssuesListComponent implements OnInit {
 
   dataRows: IssueModel[] = [];
 
-  constructor() { }
+  constructor(private data: IssuesData) { }
 
   ngOnInit() {
     this._loadData();
   }
 
-
   private _loadData(): void {
-    this.dataRows = [
-      {
-        title: 'Lorem Ipsum',
-        description: 'Lorem ipsum sir dolor amet',
-        state: 'open'
-      },
-      {
-        title: 'Lorem Ipsum2',
-        description: 'Lorem ipsum sir dolor amet2',
-        state: 'pending'
+
+    this.data.get().subscribe((result: ResponseData<IssueModel[]>) => {
+      if (result.success) {
+        this.dataRows = result.data;
       }
-    ];
+    });
   }
 }
