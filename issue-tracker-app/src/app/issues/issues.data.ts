@@ -19,4 +19,7 @@ export class IssuesData {
   public get(): Observable<ResponseData<IssueModel[]>> {
     return this._http.get<IssueModel[]>(`issues`);
   }
+  public post(model: IssueModel): Observable<ResponseData<IssueModel>> {
+    return this._http.post<IssueModel>(`issues/save`, model);
+  }
 }

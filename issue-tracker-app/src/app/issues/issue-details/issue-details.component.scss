@@ -1,0 +1,18 @@
+.issue-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.select-field {
+    margin: 10px;
+}
+
+.text-field {
+    display: inline-block;
+    margin: 10px;
+}
+
+.textarea {
+    max-width: 250px;
+}

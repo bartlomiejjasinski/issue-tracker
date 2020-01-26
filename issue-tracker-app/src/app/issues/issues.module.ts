@@ -12,10 +12,12 @@ import {
 
 import { IssuesRoutingModule } from './issues-routing.module';
 import { IssuesListComponent } from './issues-list/issues-list.component';
+import { IssueDetailsComponent } from './issue-details/issue-details.component';
 
 @NgModule({
   declarations: [
     IssuesListComponent,
+    IssueDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +36,7 @@ import { IssuesListComponent } from './issues-list/issues-list.component';
     MatCheckboxModule,
     IssuesRoutingModule,
   ],
-  exports: [IssuesListComponent],
+  exports: [IssuesListComponent, IssueDetailsComponent],
   entryComponents: []
 })
 export class IssuesModule { }

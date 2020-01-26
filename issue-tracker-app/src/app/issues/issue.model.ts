@@ -3,3 +3,5 @@ export class IssueModel {
     description: string;
     state: string;
 }
+
+export const issueStates = ['open', 'pending', 'closed'];
