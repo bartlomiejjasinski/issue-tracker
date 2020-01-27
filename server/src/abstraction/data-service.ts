@@ -7,6 +7,7 @@ export abstract class DataService<TIModel extends Document> {
     ) {}
 
     public getById(id: Types.ObjectId): Promise<TIModel> {
+
         return new Promise<TIModel>((res, rej) => {
             this.schema.findById(id, (err: any, result: TIModel) => {
                 if (err) {
@@ -21,7 +22,6 @@ export abstract class DataService<TIModel extends Document> {
     public getAll(): Promise<TIModel[]> {
 
         return new Promise<TIModel[]>((res, rej) => {
-
             this.schema
                 .find({})
                 .then((result: TIModel[]) => {
@@ -34,6 +34,7 @@ export abstract class DataService<TIModel extends Document> {
     }
 
     public async save(model: TIModel): Promise<TIModel> {
+
         let dbModel: TIModel;
 
         model._id = new Types.ObjectId(model._id);

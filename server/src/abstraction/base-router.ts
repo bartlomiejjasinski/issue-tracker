@@ -10,19 +10,13 @@ export abstract class BaseRouter {
         this._router = Router();
         this._basePath = basePath;
 
-        this.configMiddlewares();
         this.configRoutes();
-    }
-
-    public get router(): Router {
-        return this._router;
     }
 
     public asMiddleware(app: Application): void {
         app.use(this._basePath, this._router);
     }
 
-    protected abstract configMiddlewares(): void;
     protected abstract configRoutes(): void;
 
     protected getAsync(path: PathParams, handler: RequestHandler): void {
@@ -34,6 +28,7 @@ export abstract class BaseRouter {
     }
 
     protected success(res: Response, data: any, message?: string): void {
+
         const result: ResponseData = {
             success: true,
             message,
