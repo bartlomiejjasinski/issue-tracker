@@ -33,6 +33,8 @@ export class IssueDetailsComponent implements OnInit {
     }
   ];
 
+  stateIndex: number;
+
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -70,6 +72,7 @@ export class IssueDetailsComponent implements OnInit {
   }
 
   private _loadData(): void {
+    this.stateIndex = issueStates.findIndex(state => state === this.model.state);
     this.form.patchValue(this.model);
   }
 
