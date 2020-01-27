@@ -24,9 +24,9 @@ export class IssuesRouter extends BaseRouter {
     private async save(req: Request, res: Response): Promise<void> {
 
         const updatedModel = req.body;
-        const currentModel = await this.data.getById(updatedModel._id);
 
         try {
+            const currentModel = await this.data.getById(updatedModel._id);
             await this.validate(updatedModel, currentModel);
 
             const model = await this.data.save(req.body);
