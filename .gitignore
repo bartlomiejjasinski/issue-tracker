@@ -16,7 +16,7 @@ server/coverage
 server/benchmarks/graphs
 
 # Custom
-server/src/config
+server/src/config/config.env.ts
 
 #ANGULAR
 
