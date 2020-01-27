@@ -37,6 +37,16 @@ In server directory start server with command:
 npm run dev
 ```
 
+Copy file
+```
+server/config/config.env.example.ts
+```
+rename to
+```
+server/config/config.env.ts
+```
+and configure database and server port
+
 ## Built With
 
 * [Angular](https://angular.io/docs) - The web framework used
