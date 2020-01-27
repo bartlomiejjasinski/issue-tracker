@@ -43,7 +43,6 @@ export class IssueDetailsComponent implements OnInit {
     private _snackBar: MatSnackBar,
   ) { }
 
-
   ngOnInit() {
     this._buildForm();
     this._loadData();
@@ -54,7 +53,6 @@ export class IssueDetailsComponent implements OnInit {
       this.save();
     }
   }
-
 
   private _buildForm(): void {
     const fg = this._fb.group({});
@@ -72,7 +70,7 @@ export class IssueDetailsComponent implements OnInit {
   }
 
   private _loadData(): void {
-    this.stateIndex = issueStates.findIndex(state => state === this.model.state);
+    this.stateIndex = this.getCurrentStateIndex();
     this.form.patchValue(this.model);
   }
 
@@ -81,12 +79,17 @@ export class IssueDetailsComponent implements OnInit {
           .subscribe(res => {
             if (res.success) {
               this.model = res.data;
+              this.stateIndex = this.getCurrentStateIndex();
             } else {
               this._snackBar.open(res.errorMessage, 'Error',{
-                duration: 5 * 1000,
+                duration: 5 * 1000, // 5 seconds
               });
             }
           });
+  }
+
+  getCurrentStateIndex(): number {
+    return issueStates.findIndex(state => state === this.model.state);
   }
 }
 
