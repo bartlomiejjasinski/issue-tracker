@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup} from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { IssuesData } from '../issues.data';
 import { IssueModel, issueStates } from '../issue.model';
@@ -36,7 +37,8 @@ export class IssueDetailsComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router,
     private _fb: FormBuilder,
-    private data: IssuesData,
+    private _data: IssuesData,
+    private _snackBar: MatSnackBar,
   ) { }
 
 
@@ -72,15 +74,16 @@ export class IssueDetailsComponent implements OnInit {
   }
 
   save(): void {
-      this.data.post(this.form.value)
+      this._data.post(this.form.value)
           .subscribe(res => {
             if (res.success) {
               this.model = res.data;
             } else {
-              console.error(res.errorMessage);
+              this._snackBar.open(res.errorMessage, 'Error',{
+                duration: 5 * 1000,
+              });
             }
           });
   }
 }
-
 

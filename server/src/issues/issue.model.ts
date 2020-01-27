@@ -1,5 +1,7 @@
 import { Document, model, Model } from 'mongoose';
 
+export const issueStates = ['open', 'pending', 'closed'];
+
 export interface IssueModel extends Document {
     title: String;
     description: String;
@@ -11,7 +13,7 @@ const schema = {
     description: String,
     state: {
         type: String,
-        enum: ['open', 'pending', 'closed']
+        enum: issueStates
     }
 };
 
