@@ -1,18 +1,18 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { IssuesData } from '../issues.data';
 import { IssueModel, issueStates } from '../issue.model';
 
 @Component({
-  selector: 'issue-details',
-  templateUrl: './issue-details.component.html',
-  styleUrls: ['./issue-details.component.scss']
+  selector: 'issue-edit',
+  templateUrl: './issue-edit.component.html',
+  styleUrls: ['./issue-edit.component.scss']
 })
 
-export class IssueDetailsComponent implements OnInit {
+export class IssueEditComponent implements OnInit {
 
   @Input() model: IssueModel;
   form: FormGroup;
@@ -23,17 +23,18 @@ export class IssueDetailsComponent implements OnInit {
       name: '_id', title: 'Id', formState: 'New', validators: [], asyncValidators: []
     },
     {
-      name: 'title', title: 'Title', formState: '', validators: [], asyncValidators: []
+      name: 'title', title: 'Title', formState: '', validators: [Validators.required], asyncValidators: []
     },
     {
       name: 'description', title: 'Description', formState: '', validators: [], asyncValidators: []
     },
     {
-      name: 'state', title: 'State', formState: '', validators: [], asyncValidators: []
+      name: 'state', title: 'State', formState: '', validators: [Validators.required], asyncValidators: []
     }
   ];
 
   stateIndex: number;
+  isEdit: boolean = false;
 
   constructor(
     private _route: ActivatedRoute,
@@ -44,17 +45,31 @@ export class IssueDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._buildForm();
-    this._loadData();
+    this.buildForm();
+    this.loadData();
   }
 
-  onSubmit(): void {
-    if (this.form.valid) {
-      this.save();
+  loadData() {
+    const id = this._route.snapshot.paramMap.get('id');
+
+    if (id) {
+      this.isEdit = true;
+
+      this._data.getOne(id).subscribe(res => {
+        if (res.success) {
+          this.model = res.data;
+          this.stateIndex = this.getCurrentStateIndex();
+          this.form.patchValue(this.model);
+        } else {
+          this._snackBar.open(res.errorMessage, 'Error',{
+            duration: 5 * 1000,
+          });
+        }
+      });
     }
   }
 
-  private _buildForm(): void {
+  private buildForm(): void {
     const fg = this._fb.group({});
     for (const field of this._fields) {
       fg.addControl(field.name,
@@ -69,9 +84,10 @@ export class IssueDetailsComponent implements OnInit {
     this.form = fg;
   }
 
-  private _loadData(): void {
-    this.stateIndex = this.getCurrentStateIndex();
-    this.form.patchValue(this.model);
+  onSubmit(): void {
+    if (this.form.valid) {
+      this.save();
+    }
   }
 
   save(): void {
@@ -79,10 +95,10 @@ export class IssueDetailsComponent implements OnInit {
           .subscribe(res => {
             if (res.success) {
               this.model = res.data;
-              this.stateIndex = this.getCurrentStateIndex();
+              this._router.navigate(['/']);
             } else {
               this._snackBar.open(res.errorMessage, 'Error',{
-                duration: 5 * 1000, // 5 seconds
+                duration: 5 * 1000,
               });
             }
           });
@@ -92,4 +108,3 @@ export class IssueDetailsComponent implements OnInit {
     return issueStates.findIndex(state => state === this.model.state);
   }
 }
-

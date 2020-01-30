@@ -3,6 +3,7 @@ import { Document, model, Model } from 'mongoose';
 export const issueStates = ['open', 'pending', 'closed'];
 
 export interface IssueModel extends Document {
+    _id?: String;
     title: String;
     description: String;
     state: 'open' | 'pending' | 'closed';

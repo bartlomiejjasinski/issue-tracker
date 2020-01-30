@@ -37,9 +37,14 @@ export abstract class DataService<TIModel extends Document> {
 
         let dbModel: TIModel;
 
-        model._id = new Types.ObjectId(model._id);
-        dbModel = await this.getById(model._id);
-        dbModel.set(model);
+        if (model._id !== 'New') {
+            model._id = new Types.ObjectId(model._id);
+            dbModel = await this.getById(model._id);
+            dbModel.set(model);
+        } else {
+            delete model._id;
+            dbModel = await this.schema.create(model);
+        }
 
         return await dbModel.save();
     }

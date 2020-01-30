@@ -13,7 +13,13 @@ export class IssuesRouter extends BaseRouter {
 
     protected configRoutes(): void {
         this.getAsync('/', this.getAll);
+        this.getAsync('/:id', this.getOne);
         this.postAsync('/save', this.save);
+    }
+
+    private async getOne(req: Request, res: Response): Promise<void> {
+        const issue = await this.data.getById(req.params.id);
+        this.success(res, issue);
     }
 
     private async getAll(req: Request, res: Response): Promise<void> {
@@ -23,13 +29,11 @@ export class IssuesRouter extends BaseRouter {
 
     private async save(req: Request, res: Response): Promise<void> {
 
-        const updatedModel = req.body;
-
         try {
-            const currentModel = await this.data.getById(updatedModel._id);
-            await this.validate(updatedModel, currentModel);
+            await this.validate(req.body);
 
             const model = await this.data.save(req.body);
+
             this.success(res, model, 'Saved');
         } catch (err) {
 
@@ -42,12 +46,18 @@ export class IssuesRouter extends BaseRouter {
         }
     }
 
-    private validate(updatedModel: IssueModel, currentModel: IssueModel): Promise<void> {
+    private async validate(issue: IssueModel): Promise<void> {
 
-        const updatedIndex = issueStates.findIndex(state => state === updatedModel.state);
-        const currentIndex = issueStates.findIndex(state => state === currentModel.state);
+        if (issue._id === 'New') {
+            return Promise.resolve();
+        }
 
-        if (updatedIndex < currentIndex) {
+        const dbIssue = await this.data.getById(issue._id);
+
+        const index = issueStates.findIndex(state => state === issue.state);
+        const dbIndex = issueStates.findIndex(state => state === dbIssue.state);
+
+        if (index < dbIndex) {
             throw new Error('This state is not allowed');
         }
 

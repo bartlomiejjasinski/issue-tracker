@@ -1,4 +1,21 @@
-.issues-list {
-  list-style: none;
-  padding: 0;
+.issues-container {
+  min-width: 600px;
+}
+
+.action-buttons-container {
+  text-align: right;
+}
+
+.cell {
+  padding-right: 24px;
+}
+
+.message {
+  text-align: center;
+  padding: 10px 20px 30px;
+  font-size: 20px;
+}
+
+.table {
+  width: 100%;
 }

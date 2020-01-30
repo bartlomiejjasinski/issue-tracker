@@ -10,7 +10,9 @@ import { ResponseData } from "../../common/ResponseData.class";
 })
 
 export class IssuesListComponent implements OnInit {
+
   dataRows: IssueModel[] = [];
+  displayedColumns = ['title', 'description', 'state', 'action'];
 
   constructor(private data: IssuesData) { }
 
