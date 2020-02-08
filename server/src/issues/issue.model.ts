@@ -1,13 +1,5 @@
-import { Document, model, Model } from 'mongoose';
-
-export const issueStates = ['open', 'pending', 'closed'];
-
-export interface IssueModel extends Document {
-    _id?: String;
-    title: String;
-    description: String;
-    state: 'open' | 'pending' | 'closed';
-}
+import { model, Model } from 'mongoose';
+import { Issue, issueStates } from "../shared/interface/issue.interface";
 
 const schema = {
     title: String,
@@ -18,4 +10,4 @@ const schema = {
     }
 };
 
-export let IssueSchema: Model<IssueModel> = model<IssueModel>('Issue', schema, 'issues', true);
+export let IssueSchema: Model<Issue> = model<Issue>('Issue', schema, 'issues', true);

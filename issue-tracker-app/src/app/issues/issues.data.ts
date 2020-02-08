@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 
 import { ResponseData } from '../common/ResponseData.class';
 
-import { Issue } from './issue.interface';
+import { Issue } from '../../../../server/src/shared/interface/issue.interface';
 import { HttpClientWarpper } from '../common/http-client-warpper';
 
 @Injectable({

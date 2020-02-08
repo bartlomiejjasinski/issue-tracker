@@ -11,7 +11,8 @@
   "dependencies": {
     "@types/express-serve-static-core": "^4.17.2",
     "express": "^4.17.1",
-    "mongoose": "^5.8.9"
+    "mongoose": "^5.8.9",
+    "tslib": "^1.10.0"
   },
   "devDependencies": {
     "typescript": "^3.7.5",

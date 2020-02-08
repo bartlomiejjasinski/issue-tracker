@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Issue } from '../issue.interface';
+// import { Issue } from '../issue.interface';
 import { IssuesData } from './../issues.data';
+import { Issue } from '../../../../../server/src/shared/interface/issue.interface';
 import { ResponseData } from "../../common/ResponseData.class";
 
 @Component({

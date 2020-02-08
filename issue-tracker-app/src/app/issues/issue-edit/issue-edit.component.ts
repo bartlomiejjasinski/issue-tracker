@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { IssuesData } from '../issues.data';
-import { Issue, issueStates } from '../issue.interface';
+import { Issue, issueStates } from '../../../../../server/src/shared/interface/issue.interface';
 
 @Component({
   selector: 'issue-edit',

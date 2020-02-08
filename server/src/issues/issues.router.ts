@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { BaseRouter } from '../abstraction/base-router';
 import { IssuesData } from './issues.data';
-import { IssueModel, issueStates } from "./issue.model";
+import { Issue, issueStates } from "../shared/interface/issue.interface";
 
 export class IssuesRouter extends BaseRouter {
 
@@ -46,7 +46,7 @@ export class IssuesRouter extends BaseRouter {
         }
     }
 
-    private async validate(issue: IssueModel): Promise<void> {
+    private async validate(issue: Issue): Promise<void> {
 
         if (issue._id === 'New') {
             return Promise.resolve();
@@ -54,8 +54,8 @@ export class IssuesRouter extends BaseRouter {
 
         const dbIssue = await this.data.getById(issue._id);
 
-        const index = issueStates.findIndex(state => state === issue.state);
-        const dbIndex = issueStates.findIndex(state => state === dbIssue.state);
+        const index = issueStates.findIndex(state => state as any === issue.state);
+        const dbIndex = issueStates.findIndex(state => state as any === dbIssue.state);
 
         if (index < dbIndex) {
             throw new Error('This state is not allowed');

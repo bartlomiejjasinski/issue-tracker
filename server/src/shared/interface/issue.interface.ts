@@ -5,6 +5,7 @@ enum IssueState {
 }
 
 export interface Issue {
+    _id?: String;
     title: string;
     description: string;
     state: IssueState;
