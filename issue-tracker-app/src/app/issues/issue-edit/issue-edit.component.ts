@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { IssuesData } from '../issues.data';
-import { IssueModel, issueStates } from '../issue.model';
+import { Issue, issueStates } from '../issue.interface';
 
 @Component({
   selector: 'issue-edit',
@@ -14,7 +14,7 @@ import { IssueModel, issueStates } from '../issue.model';
 
 export class IssueEditComponent implements OnInit {
 
-  @Input() model: IssueModel;
+  @Input() model: Issue;
   form: FormGroup;
   issueStates = issueStates;
 
@@ -105,6 +105,6 @@ export class IssueEditComponent implements OnInit {
   }
 
   getCurrentStateIndex(): number {
-    return issueStates.findIndex(state => state === this.model.state);
+    return this.issueStates.findIndex(state => state as any === this.model.state);
   }
 }

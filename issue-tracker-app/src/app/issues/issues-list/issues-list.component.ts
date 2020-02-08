@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IssueModel } from '../issue.model';
+import { Issue } from '../issue.interface';
 import { IssuesData } from './../issues.data';
 import { ResponseData } from "../../common/ResponseData.class";
 
@@ -11,7 +11,7 @@ import { ResponseData } from "../../common/ResponseData.class";
 
 export class IssuesListComponent implements OnInit {
 
-  dataRows: IssueModel[] = [];
+  dataRows: Issue[] = [];
   displayedColumns = ['title', 'description', 'state', 'action'];
 
   constructor(private data: IssuesData) { }
@@ -22,7 +22,7 @@ export class IssuesListComponent implements OnInit {
 
   private _loadData(): void {
 
-    this.data.get().subscribe((result: ResponseData<IssueModel[]>) => {
+    this.data.get().subscribe((result: ResponseData<Issue[]>) => {
       if (result.success) {
         this.dataRows = result.data;
       }

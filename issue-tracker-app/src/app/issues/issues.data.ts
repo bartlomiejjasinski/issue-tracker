@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 
 import { ResponseData } from '../common/ResponseData.class';
 
-import { IssueModel } from './issue.model';
+import { Issue } from './issue.interface';
 import { HttpClientWarpper } from '../common/http-client-warpper';
 
 @Injectable({
@@ -16,13 +16,13 @@ export class IssuesData {
     private _http: HttpClientWarpper,
   ) { }
 
-  public get(): Observable<ResponseData<IssueModel[]>> {
-    return this._http.get<IssueModel[]>(`issues`);
+  public get(): Observable<ResponseData<Issue[]>> {
+    return this._http.get<Issue[]>(`issues`);
   }
-  public getOne(id: string): Observable<ResponseData<IssueModel>> {
-    return this._http.get<IssueModel>(`issues/${id}`);
+  public getOne(id: string): Observable<ResponseData<Issue>> {
+    return this._http.get<Issue>(`issues/${id}`);
   }
-  public post(model: IssueModel): Observable<ResponseData<IssueModel>> {
-    return this._http.post<IssueModel>(`issues/save`, model);
+  public post(model: Issue): Observable<ResponseData<Issue>> {
+    return this._http.post<Issue>(`issues/save`, model);
   }
 }
